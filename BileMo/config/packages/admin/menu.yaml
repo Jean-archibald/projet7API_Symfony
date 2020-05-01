@@ -1,0 +1,9 @@
+easy_admin:
+    design:
+        menu:
+            - label: 'BileMo'
+              icon: 'newspaper-o'
+              children:
+                    - {entity: 'Products', label: 'Produits'}
+                    - {entity: 'Partners', label: 'Partenaires'}
+                    - {entity: 'Clients', label: 'Clients'}

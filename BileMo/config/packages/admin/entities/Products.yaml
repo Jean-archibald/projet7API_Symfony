@@ -1,0 +1,10 @@
+easy_admin:
+    entities:
+        Products:
+            class: App\Entity\Products
+            controller: App\Controller\ProductsController
+            form:
+              fields:
+                - {property: 'name'}
+                - {property: 'content'}
+                - {property: 'price'}

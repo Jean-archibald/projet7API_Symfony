@@ -1,0 +1,10 @@
+easy_admin:
+    entities:
+        Partners:
+            class: App\Entity\Partners
+            controller: App\Controller\PartnersController
+            form:
+                 fields:
+                    - {property: 'name'}
+                    - {property: 'email'}
+          

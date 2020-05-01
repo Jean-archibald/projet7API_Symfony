@@ -1,0 +1,13 @@
+easy_admin:
+    entities:
+        Clients:
+            class: App\Entity\Clients
+            form:
+                 fields:
+                    - {property: 'name'}
+                    - {property: 'firstname'}
+                    - {property: 'email'}
+                    - {property: 'adresse'}
+                    - {property: 'postalCode'}
+                    - {property: 'birthDate'}
+                    - {property: 'partners'}

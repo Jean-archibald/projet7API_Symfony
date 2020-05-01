@@ -24,6 +24,11 @@ class Clients
      */
     private $name;
 
+     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstname;
+
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -33,11 +38,6 @@ class Clients
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -55,7 +55,7 @@ class Clients
     private $birthDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\partners", inversedBy="clients")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Partners", inversedBy="clients")
      */
     private $partnersId;
 
@@ -158,5 +158,10 @@ class Clients
         $this->partnersId = $partnersId;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

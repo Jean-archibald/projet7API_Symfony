@@ -45,6 +45,11 @@ class Partners
      */
     private $clients;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $statusConfirmed;
+
     public function __construct()
     {
         $this->clients = new ArrayCollection();
@@ -130,6 +135,18 @@ class Partners
                 $client->setPartnersId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatusConfirmed(): ?bool
+    {
+        return $this->statusConfirmed;
+    }
+
+    public function setStatusConfirmed(bool $statusConfirmed): self
+    {
+        $this->statusConfirmed = $statusConfirmed;
 
         return $this;
     }

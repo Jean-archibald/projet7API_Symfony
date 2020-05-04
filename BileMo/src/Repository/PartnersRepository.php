@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Partners;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * @method Partners|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +13,36 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Partners[]    findAll()
  * @method Partners[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PartnersRepository extends ServiceEntityRepository
+class PartnersRepository extends ServiceEntityRepository  implements UserLoaderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Partners::class);
     }
+
+    public function sendMailConfirmation($partners,$notification,$mailer)
+    {
+        $notification->notify($partners,$mailer);
+    }
+
+    public function confirmedMailPartners($partners,$manager)
+    {
+        $partners->setStatusConfirmed(1);
+        $manager->persist($partners);
+        $manager->flush();
+    }
+
+
+    public function loadUserByUsername($username)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.username = :username OR u.email = :email')
+            ->setParameter('username', $username)
+            ->setParameter('email', $username)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 
     // /**
     //  * @return Partners[] Returns an array of Partners objects

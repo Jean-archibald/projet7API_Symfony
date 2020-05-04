@@ -6,12 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PartnersRepository")
  * @ApiResource
  */
-class Partners
+class Partners implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -50,6 +51,11 @@ class Partners
      */
     private $statusConfirmed;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $confirmationToken;
+
     public function __construct()
     {
         $this->clients = new ArrayCollection();
@@ -58,6 +64,11 @@ class Partners
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUserName(): ?string
+    {
+        return $this->name;
     }
 
     public function getName(): ?string
@@ -149,5 +160,32 @@ class Partners
         $this->statusConfirmed = $statusConfirmed;
 
         return $this;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+
+    public function getSalt()
+    {
+        return null;
     }
 }

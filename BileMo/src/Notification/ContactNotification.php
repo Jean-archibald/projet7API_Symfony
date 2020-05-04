@@ -30,16 +30,16 @@ class ContactNotification {
     public function notify(Partners $partners)
     {
         $urlConfirmedToken = $this->router->generate('app_confirmed_mail', [
-            'Apitoken' => $partners->getApitoken()
+            'ConfirmationToken' => $partners->getConfirmationToken()
         ]); 
 
         $email = (new Email())
                     ->from('jvjlondon@outlook.com')
                     ->to($partners->getEmail())
-                    ->subject('Activate your account, Registration of ' . $partners->getUsername())
+                    ->subject('Activate your account, Registration of ' . $partners->getName())
                     ->replyTo('jvjlondon@outlook.com')
                     ->html($this->renderer->render('emails/confirmation.html.twig',[
-                        'user' => $partners,
+                        'partners' => $partners,
                         'urlConfirmedToken' => 'http://localhost:8000' . $urlConfirmedToken 
                     ]));
 

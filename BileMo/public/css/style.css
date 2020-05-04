@@ -24,4 +24,19 @@ p{
 {
     color:red;
 }
+/* Login page*/
+.loginFormDiv
+{
+    width:70%;
+    margin:0 auto;
+    margin-top:50px;
+    text-align: center;
+    
+}
+
+.loginButton
+{
+    margin-top:20px;
+    text-align: center;
+}
 

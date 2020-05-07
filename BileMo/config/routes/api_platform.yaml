@@ -1,8 +1,8 @@
 api_platform:
     resource: .
     type: api_platform
-    prefix: /api/v1
+    prefix: /api
 
-login_check:
-    path:     /login_check
+authentication_token:
+    path:     /authentication_token
     methods:  ['POST']

@@ -1,8 +1,8 @@
+# api/config/packages/security.yaml
 security:
     encoders:
         App\Entity\Partners:
             algorithm: argon2i
-
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -17,7 +17,17 @@ security:
             pattern: ^/_(profiler|wdt)
             security: false
         api:
-            pattern: ^/api/v1
+            pattern: ^/authentication_token
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: /authentication_token
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api_login:
+            pattern: ^/api
             stateless: true
             anonymous: true
             provider: app_user_provider
@@ -25,15 +35,20 @@ security:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
         main:
+            stateless: false
             anonymous: true
-            json_login:
-                check_path: /login_check
-                username_path: email
-                password_path: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\AppBilemoAuthenticator
+            logout:
+                path: app_logout
+
 
     access_control:
-      # - { path: ^/api/v1, roles: IS_AUTHENTICATED_ANONYMOUSLY } # Allows accessing the Swagger UI
-       #- { path: ^/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-      # - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/home, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/forgotPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/authentication_token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/front, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }

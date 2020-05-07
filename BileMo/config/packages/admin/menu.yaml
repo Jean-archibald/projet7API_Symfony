@@ -4,8 +4,7 @@ easy_admin:
             - label: 'BileMo'
               icon: 'newspaper-o'
               children:
-                    - {entity: 'Products', label: 'Produits'}
-                    - {entity: 'Partners', label: 'Partenaires'}
-                    - {entity: 'Clients', label: 'Clients'}
-
-
+                    - {entity: 'Products', label: 'Produits', permission: 'ROLE_USER'}
+                    - {entity: 'Clients', label: 'Clients', permission: 'ROLE_USER'}
+            - {label: 'Admin', permission: 'ROLE_ADMIN'}
+            - {entity: 'Partners', label: 'Partenaires', icon: 'user', permission: 'ROLE_ADMIN'}

@@ -1,29 +1,37 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Please Login as Partners{% endblock %}
+
 {% block body %}
-
-<div class="example-wrapper">
     <h1>Please Login as Partners</h1>
-</div>
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
 
-        <div class="loginFormDiv">
-            <label for="inputEmail" class="sr-only">Email</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
-
-            <button class="btn btn-lg btn-primary loginButton" type="submit">
-                Sign in
-            </button>
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes connecté en tant que Mr/Mme {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
-    </form>
+    {% endif %}
 
+    <div class="loginFormDiv">
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+
+        <button class="btn btn-lg btn-primary loginButton" type="submit">
+            Se connecter
+        </button>
+    </div>
+</form>
+<div class="divForgotButton">
+    <a href="{{ path('app_forgotten_password') }}"><button class="btn btn-danger forgotButton" type="submit">
+            Mot de passe oublié ?</button></a>
+</div>
 {% endblock %}

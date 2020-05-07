@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <container>
+        <div>
+            <h1>Bienvenue chez BileMo</h1>
+        </div>
+
+        <div class="divButtonHome">
+            <a class="nav-link" href="{{ path('app_login') }}"><button class="btn btn-success buttonHome">Cliquez ici pour vous connecter</button></a>
+            <a class="nav-link" href="{{ path('app_login') }}"><button class="btn btn-dark buttonHome">Cliquez ici pour contacter le support</button></a>
+        </div>
+    </container>
+
+{% endblock %}
+

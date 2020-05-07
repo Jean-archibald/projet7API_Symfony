@@ -36,7 +36,7 @@ class ContactNotification {
         $email = (new Email())
                     ->from('jvjlondon@outlook.com')
                     ->to($partners->getEmail())
-                    ->subject('Activate your account, Registration of ' . $partners->getName())
+                    ->subject('Activate your account, Registration of ' . $partners->getUsername())
                     ->replyTo('jvjlondon@outlook.com')
                     ->html($this->renderer->render('emails/confirmation.html.twig',[
                         'partners' => $partners,

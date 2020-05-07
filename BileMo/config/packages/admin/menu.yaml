@@ -7,3 +7,5 @@ easy_admin:
                     - {entity: 'Products', label: 'Produits'}
                     - {entity: 'Partners', label: 'Partenaires'}
                     - {entity: 'Clients', label: 'Clients'}
+
+

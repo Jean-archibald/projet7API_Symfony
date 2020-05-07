@@ -6,6 +6,8 @@ use App\Entity\Partners;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method Partners|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,9 +27,16 @@ class PartnersRepository extends ServiceEntityRepository  implements UserLoaderI
         $notification->notify($partners,$mailer);
     }
 
-    public function confirmedMailPartners($partners,$manager)
+    public function confirmedStatusPartners($partners,$manager)
     {
         $partners->setStatusConfirmed(1);
+        $manager->persist($partners);
+        $manager->flush();
+    }
+
+    public function setPasswordAccount(Partners $partners,$password,$manager)
+    {
+        $partners->setPassword($password);
         $manager->persist($partners);
         $manager->flush();
     }

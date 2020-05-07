@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+
+use App\Notification\ContactNotification;
 use App\Repository\PartnersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,23 +24,46 @@ class SecurityController extends AbstractController
     /**
      * @Route("/confirmed/{ConfirmationToken}", name="app_confirmed_mail")
      */
-    public function confirmedMail(PartnersRepository $partnersRepository, string $ConfirmationToken, EntityManagerInterface $manager)
+    public function confirmedMail(PartnersRepository $partnersRepository, string $ConfirmationToken, EntityManagerInterface $manager,Request $request,UserPasswordEncoderInterface $encoder)
     {
         $partners = $partnersRepository->findOneBy(['confirmationToken' => $ConfirmationToken]);
+        $partnersName = $partners->getUsername();
+
         if (isset($partners)) {
-            $partnersRepository->confirmedMailPartners($partners, $manager);
-            return $this->redirectToRoute('login_check');
+            $partnersRepository->confirmedStatusPartners($partners, $manager);
         } else {
             return $this->redirectToRoute('home');
         }
+
+        if ($request->isMethod('POST')) {
+            if (isset($partners)) {
+
+                if (isset($_POST) && !empty($_POST) && ($_POST["password"] == $_POST["password2"])) {
+                    $password = $encoder->encodePassword($partners, $_POST["password"]);
+                    $partnersRepository->setPasswordAccount($partners,$password,$manager);
+                    return $this->redirectToRoute('app_login');
+                }
+            }
+        }
+
+        return $this->render('security/passwordEdit.html.twig', ['username' => $partnersName]);
     }
+
 
     /**
      * @Route("/forgotPassword", name="app_forgotten_password")
      */
-    public function forgotPassword()
+    public function forgotPassword(Request $request, PartnersRepository $partnersRepository,MailerInterface $mailer,ContactNotification $notification)
     {
+        if ($request->isMethod('POST')) {
+            $partners = $partnersRepository->findOneBy(['email' => ($_POST['email'])]);
+            if (isset($partners)) {
+                $partnersRepository->sendMailConfirmation($partners, $notification, $mailer);
+                return $this->redirectToRoute('home');
+            }
+        }
 
+        return $this->render('security/passwordForgot.html.twig');
     }
 
     /**

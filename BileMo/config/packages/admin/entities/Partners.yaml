@@ -18,6 +18,7 @@ easy_admin:
 
               item_permission: 'ROLE_ADMIN'
               actions:
+                - {name: 'show',icon: 'eye', label: false, css_class: 'btn btn-primary'}
                 - {name: 'edit',icon: 'pencil', label: false, css_class: 'btn btn-secondary'}
                 - {name: 'delete',icon: 'trash', label: false, css_class: 'btn btn-danger'}
           

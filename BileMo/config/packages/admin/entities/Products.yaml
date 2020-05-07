@@ -11,9 +11,10 @@ easy_admin:
                 - {property: 'price'}
             list:
               fields:
-                - {property: 'name', label: 'nom'}
-                - {property: 'content', label: 'description'}
-                - {property: 'price', label: 'prix'}
+                - {property: 'name', label: 'Nom'}
+                - {property: 'content', label: 'Description'}
+                - {property: 'price', label: 'Prix'}
               actions:
+                - {name: 'show',icon: 'eye', label: false, css_class: 'btn btn-primary'}
                 - {name: 'edit',icon: 'pencil', label: false, css_class: 'btn btn-secondary'}
                 - {name: 'delete',icon: 'trash', label: false, css_class: 'btn btn-danger'}

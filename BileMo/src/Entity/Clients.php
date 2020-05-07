@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\PartnersRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -163,5 +164,11 @@ class Clients
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getPartnersname()
+    {
+        $partnersName = $this->getPartnersId()->getUsername();
+        return $partnersName;
     }
 }

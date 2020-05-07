@@ -52,6 +52,21 @@ class ClientsController extends EasyAdminController
         $this->em->flush();
     }
 
+    protected function createListQueryBuilder($entityClass, $sortDirection, $sortField = null, $dqlFilter = null)
+    {
+        $roles = $this->getUser()->getRoles();
+        if ($roles[0] == "ROLE_ADMIN") {
+            return $this->get('easyadmin.query_builder')->createListQueryBuilder($this->entity, $sortField, $sortDirection, $dqlFilter);
+        }
+        elseif (null === $dqlFilter) {
+            $dqlFilter = sprintf('entity.partnersId = %s', $this->getUser()->getId());
+        } else {
+            $dqlFilter .= sprintf(' AND entity.partnersId = %s', $this->getUser()->getId());
+        }
+
+        return parent::createListQueryBuilder($entityClass, $sortDirection, $sortField, $dqlFilter);
+    }
+
 
 
 }

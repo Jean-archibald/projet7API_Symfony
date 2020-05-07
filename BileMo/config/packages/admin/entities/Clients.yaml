@@ -3,22 +3,32 @@ easy_admin:
         Clients:
             class: App\Entity\Clients
             controller: App\Controller\ClientsController
+            show:
+              fields:
+                - {property: 'name',label: 'Nom de famille'}
+                - {property: 'firstname',label: 'Prénom'}
+                - {property: 'email'}
+                - {property: 'adresse'}
+                - {property: 'postalCode',label: 'Code postal'}
+                - {property: 'birthDate',label: 'Date de naissance'}
+                - {property: 'partnersname',,label: 'Partneraire associé'}
             form:
                  fields:
                     - {property: 'name',label: 'Nom de famille'}
-                    - {property: 'firstname',label: 'prénom'}
+                    - {property: 'firstname',label: 'Prénom'}
                     - {property: 'email'}
                     - {property: 'adresse'}
-                    - {property: 'postalCode',label: 'code postal'}
+                    - {property: 'postalCode',label: 'Code postal'}
                     - {property: 'birthDate',label: 'Date de naissance', type: 'App\Form\MyCustomDateType'}
             list:
                 fields:
                   - {property: 'name',label: 'Nom de famille'}
-                  - {property: 'firstname',label: 'prénom'}
+                  - {property: 'firstname',label: 'Prénom'}
                   - {property: 'email'}
                   - {property: 'adresse'}
-                  - {property: 'postalCode',label: 'code postal'}
+                  - {property: 'postalCode',label: 'Code postal'}
                   - {property: 'birthDate',label: 'Date de naissance'}
                 actions:
+                  - {name: 'show',icon: 'eye', label: false, css_class: 'btn btn-primary'}
                   - {name: 'edit',icon: 'pencil', label: false, css_class: 'btn btn-secondary'}
                   - {name: 'delete',icon: 'trash', label: false, css_class: 'btn btn-danger'}

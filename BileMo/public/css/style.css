@@ -24,6 +24,21 @@ p{
 {
     color:red;
 }
+
+/* Home page*/
+.divButtonHome
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.buttonHome
+{
+    margin-top: 20px;
+}
+
 /* Login page*/
 .loginFormDiv
 {
@@ -38,5 +53,16 @@ p{
 {
     margin-top:20px;
     text-align: center;
+}
+
+.divForgotButton
+{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.forgotButton
+{
+    margin-top: 20px;
 }
 

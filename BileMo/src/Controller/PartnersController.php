@@ -38,6 +38,7 @@ class PartnersController extends EasyAdminController
         $data->setCreatedAt(new \Datetime());
         $data->setPassword('undefined');
         $data->setStatusConfirmed(0);
+        $data->setRoles(["ROLE_USER"]);
         $token = rtrim(strtr(base64_encode(random_bytes(32)), '+/','-_'), '=');
         $data->setConfirmationToken($token);
         $hash = $this->encoder->encodePassword($data, $data->getPassword());
@@ -61,6 +62,6 @@ class PartnersController extends EasyAdminController
         $this->em->flush();
     }
 
-   
+
 
 }

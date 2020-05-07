@@ -4,7 +4,20 @@ easy_admin:
             class: App\Entity\Partners
             controller: App\Controller\PartnersController
             form:
-                 fields:
-                    - {property: 'name'}
+                title: Ajouter/Modifier un partenaire
+                fields:
+                    - {property: 'username'}
                     - {property: 'email'}
+            list:
+              fields:
+                - {property: 'username', label: 'Nom'}
+                - {property: 'Email'}
+                - {property: 'createdAt', label: 'Date de création'}
+                - {property: 'statusConfirmed', label: 'Statut'}
+                - {property: 'clients'}
+
+              item_permission: 'ROLE_ADMIN'
+              actions:
+                - {name: 'edit',icon: 'pencil', label: false, css_class: 'btn btn-secondary'}
+                - {name: 'delete',icon: 'trash', label: false, css_class: 'btn btn-danger'}
           

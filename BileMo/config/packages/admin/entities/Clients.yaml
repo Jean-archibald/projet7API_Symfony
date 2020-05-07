@@ -2,12 +2,23 @@ easy_admin:
     entities:
         Clients:
             class: App\Entity\Clients
+            controller: App\Controller\ClientsController
             form:
                  fields:
-                    - {property: 'name'}
-                    - {property: 'firstname'}
+                    - {property: 'name',label: 'Nom de famille'}
+                    - {property: 'firstname',label: 'prénom'}
                     - {property: 'email'}
                     - {property: 'adresse'}
-                    - {property: 'postalCode'}
-                    - {property: 'birthDate'}
-                    - {property: 'partners'}
+                    - {property: 'postalCode',label: 'code postal'}
+                    - {property: 'birthDate',label: 'Date de naissance', type: 'App\Form\MyCustomDateType'}
+            list:
+                fields:
+                  - {property: 'name',label: 'Nom de famille'}
+                  - {property: 'firstname',label: 'prénom'}
+                  - {property: 'email'}
+                  - {property: 'adresse'}
+                  - {property: 'postalCode',label: 'code postal'}
+                  - {property: 'birthDate',label: 'Date de naissance'}
+                actions:
+                  - {name: 'edit',icon: 'pencil', label: false, css_class: 'btn btn-secondary'}
+                  - {name: 'delete',icon: 'trash', label: false, css_class: 'btn btn-danger'}

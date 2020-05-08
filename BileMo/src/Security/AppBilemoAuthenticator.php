@@ -98,7 +98,7 @@ class AppBilemoAuthenticator extends AbstractFormLoginAuthenticator implements P
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('easyadmin'));
+        return new RedirectResponse($this->urlGenerator->generate('confirmationLogin'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

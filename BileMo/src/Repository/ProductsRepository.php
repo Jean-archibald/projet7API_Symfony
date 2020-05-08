@@ -3,12 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Products;
-use App\Form\ProductsType;
+
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManager;
+
 
 /**
  * @method Products|null find($id, $lockMode = null, $lockVersion = null)
@@ -21,6 +20,13 @@ class ProductsRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Products::class);
+    }
+
+    public function persistProducts($data,$manager)
+    {
+        $data->setCreatedAt(new \Datetime());
+        $manager->persist($data);
+        $manager->flush();
     }
 
 

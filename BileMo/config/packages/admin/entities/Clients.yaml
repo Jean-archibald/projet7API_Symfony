@@ -21,6 +21,7 @@ easy_admin:
                     - {property: 'postalCode',label: 'Code postal'}
                     - {property: 'birthDate',label: 'Date de naissance', type: 'App\Form\MyCustomDateType'}
             list:
+                max_results: 8
                 fields:
                   - {property: 'name',label: 'Nom de famille'}
                   - {property: 'firstname',label: 'Prénom'}

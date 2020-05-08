@@ -31,12 +31,7 @@ class ClientsController extends EasyAdminController
     {
         $partners = $this->getUser();
         $partnersId = $partners->getId();
-        $data->setPartnersId($partners, $partnersId );
-        $data->setCreatedAt(new \Datetime());
-        $this->em->persist($data);
-        $this->em->flush();
-
-
+        $this->clientsRepository->persistClients($data,$this->em,$partners,$partnersId);
     }
 
     protected function removeEntity($data)

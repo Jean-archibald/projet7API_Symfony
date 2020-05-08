@@ -3,16 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Products;
+use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
+
 
 class ProductsController extends EasyAdminController
 {
     protected $em;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em,ProductsRepository $productsRepository)
     {
         $this->em = $em;
+        $this->productsRepository = $productsRepository;
     }
 
     protected function createNewEntity()
@@ -24,9 +27,7 @@ class ProductsController extends EasyAdminController
 
     protected function persistEntity($data)
     {
-        $data->setCreatedAt(new \Datetime());
-        $this->em->persist($data);
-        $this->em->flush();
+        $this->productsRepository->persistProducts($data,$this->em);
     }
 
     protected function removeEntity($data)
@@ -37,8 +38,6 @@ class ProductsController extends EasyAdminController
 
     protected function updateEntity($data)
     {
-        $data->setCreatedAt(new \Datetime());
-        $this->em->persist($data);
-        $this->em->flush();
+        $this->productsRepository->persistProducts($data,$this->em);
     }
 }

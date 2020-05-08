@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Notification\ContactNotification;
 use App\Repository\PartnersRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,10 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\HttpClient\HttpClient;
 
 class SecurityController extends AbstractController
 {
@@ -28,22 +24,12 @@ class SecurityController extends AbstractController
     {
         $partners = $partnersRepository->findOneBy(['confirmationToken' => $ConfirmationToken]);
         $partnersName = $partners->getUsername();
+        $partnersStatus = $partners->getStatusConfirmed();
+        $partnersRepository->confirmedMailReception($manager,$request,$encoder,$partners);
 
-        if (isset($partners)) {
-            $partnersRepository->confirmedStatusPartners($partners, $manager);
-        } else {
-            return $this->redirectToRoute('home');
-        }
-
-        if ($request->isMethod('POST')) {
-            if (isset($partners)) {
-
-                if (isset($_POST) && !empty($_POST) && ($_POST["password"] == $_POST["password2"])) {
-                    $password = $encoder->encodePassword($partners, $_POST["password"]);
-                    $partnersRepository->setPasswordAccount($partners,$password,$manager);
-                    return $this->redirectToRoute('app_login');
-                }
-            }
+        if (isset($_POST) && !empty($_POST) && $partnersStatus == true)
+        {
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('security/passwordEdit.html.twig', ['username' => $partnersName]);
@@ -90,6 +76,25 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    /**
+     * @Route("/confirmation", name="confirmationLogin")
+     */
+    public function confirmationLogin()
+    {
+        $partners = $this->getUser();
+        $partnersStatus = $partners->getStatusConfirmed();
+
+        if ($partnersStatus === true)
+        {
+            return $this->redirectToRoute('easyadmin');
+        }
+        else
+        {
+            return $this->redirectToRoute('app_login');
+        }
+
     }
 
     /**

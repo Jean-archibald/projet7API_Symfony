@@ -6,8 +6,6 @@ use App\Entity\Partners;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @method Partners|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,6 +18,27 @@ class PartnersRepository extends ServiceEntityRepository  implements UserLoaderI
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Partners::class);
+    }
+
+    public function persistPartners($data,$encoder,$manager)
+    {
+            $data->setCreatedAt(new \Datetime());
+            $data->setPassword('undefined');
+            $data->setStatusConfirmed(0);
+            $data->setRoles(["ROLE_USER"]);
+            $token = rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
+            $data->setConfirmationToken($token);
+            $hash = $encoder->encodePassword($data, $data->getPassword());
+            $data->setPassword($hash);
+            $manager->persist($data);
+            $manager->flush();
+    }
+
+    public function updatePartners($data,$manager)
+    {
+        $data->setCreatedAt(new \Datetime());
+        $manager->persist($data);
+        $manager->flush();
     }
 
     public function sendMailConfirmation($partners,$notification,$mailer)
@@ -51,6 +70,30 @@ class PartnersRepository extends ServiceEntityRepository  implements UserLoaderI
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function confirmation()
+    {
+        $user = $this->getUser();
+        dd($user);
+    }
+
+    public function confirmedMailReception($manager,$request,$encoder,$partners)
+    {
+
+        if ($request->isMethod('POST')) {
+            if (isset($partners)) {
+
+                if (isset($_POST) && !empty($_POST) && ($_POST["password"] == $_POST["password2"])) {
+                    $password = htmlspecialchars($_POST['password']);
+                    $password = $encoder->encodePassword($partners, $_POST["password"]);
+                    $this->setPasswordAccount($partners,$password,$manager);
+                    $this->confirmedStatusPartners($partners, $manager);
+                }
+            }
+        }
+    }
+
+
 
 
     // /**

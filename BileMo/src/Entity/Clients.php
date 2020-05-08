@@ -22,16 +22,21 @@ class Clients
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min="2", max="255")
      */
     private $name;
 
      /**
      * @ORM\Column(type="string", length=255)
+      * @Assert\NotBlank()
+      * @Assert\Length(min="2", max="255")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
@@ -42,11 +47,15 @@ class Clients
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(min="5", max="255")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Length(min="0", max="5")
      */
     private $postalCode;
 

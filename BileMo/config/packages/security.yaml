@@ -10,7 +10,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\Partners
-                property: email
+                property: username
 
     firewalls:
         dev:
@@ -22,7 +22,7 @@ security:
             anonymous: true
             json_login:
                 check_path: /authentication_token
-                username_path: email
+                username_path: username
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure

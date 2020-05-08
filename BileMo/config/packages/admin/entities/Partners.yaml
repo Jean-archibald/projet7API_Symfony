@@ -9,6 +9,7 @@ easy_admin:
                     - {property: 'username'}
                     - {property: 'email'}
             list:
+              max_results: 8
               fields:
                 - {property: 'username', label: 'Nom'}
                 - {property: 'Email'}

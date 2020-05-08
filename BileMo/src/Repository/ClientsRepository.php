@@ -19,6 +19,23 @@ class ClientsRepository extends ServiceEntityRepository
         parent::__construct($registry, Clients::class);
     }
 
+    public function persistClients($data,$manager,$partners,$partnersId)
+    {
+        $data->setPartnersId($partners, $partnersId );
+        $data->setCreatedAt(new \Datetime());
+        $manager->persist($data);
+        $manager->flush();
+    }
+
+
+
+
+
+
+
+
+
+
     // /**
     //  * @return Clients[] Returns an array of Clients objects
     //  */

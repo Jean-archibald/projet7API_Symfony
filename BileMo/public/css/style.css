@@ -1,6 +1,6 @@
 h1 
 {
-    color:red; 
+    color:darkred;
     text-align: center; 
     padding-bottom: 20px;  
     padding-top: 20px;
@@ -8,10 +8,25 @@ h1
 
 h2
 {
+    color:blue;
     text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+h3
+{
+    color:darkgreen;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 p{
+    text-align: center;
+}
+
+ul{
     text-align: center;
 }
 

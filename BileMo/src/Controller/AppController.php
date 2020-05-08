@@ -26,6 +26,14 @@ class AppController extends Controller
         return $this->render('api/home.html.twig');
     }
 
+    /**
+     * @Route("/docs", name="documentation")
+     */
+    public function documentation()
+    {
+        return $this->render('api/doc.html.twig');
+    }
+
 
 
 }

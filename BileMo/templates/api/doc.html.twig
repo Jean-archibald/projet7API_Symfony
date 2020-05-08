@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <container>
+        <div>
+            <h1>Documentation pour nos partneraires :</h1>
+        </div>
+
+        <div>
+            <h2>Étape 1 : Confirmation de votre compte</h2>
+            <p>
+                Vous recevrez un mail de notre support. Dans ce mail, il y a un lien, cliquez dessus et cela vous redirigera
+                vers une page de création de mot de passe.
+                Créer un mot de passe et confirmez.
+            </p>
+        </div>
+
+        <div>
+            <h2>Étape 2 : Connexion</h2>
+            <div>
+                <h3>Connexion réussie</h3>
+                    <p>
+                        Depuis la page d'accueil, cliquez sur le bouton ("Cliquez ici pour vous connecter").
+                        Renseigner ensuite sur cette nouvelle page votre email et votre mot de passe.
+                        Et cliquez sur "se connecter"
+                    </p>
+            </div>
+            <div>
+                <h3>Mot de passe perdu/oublié</h3>
+                    <p>
+                        Si vous avez oublié votre mot de passe, cliquez sur le bouton rouge "Mot de passe oublié".
+                        Vous serez alors redirigez vers une page vous demandant votre email.
+                        vous recevrez alors un email vous permettant de créer un nouveau mot de passe.
+                    </p>
+            </div>
+        </div>
+
+        <div>
+            <h2>Étape 3 : BackOffice</h2>
+                <p>
+                    Vous êtes désormais dans le backoffice et un menu sur la gauche apparait : Produits et Clients.
+                </p>
+                <div>
+                    <h3>Fonctionnalités lié au Client</h3>
+                    <ul>
+                        <li>
+                            Ajouter un client : cliquez sur le bouton bleu en haut à droite de la liste "Ajouter un client".
+                            Remplissez le formulaire et validé.
+                        </li>
+                        <li>
+                            Consulter un client : Dans la liste de client cliquez sur le bouton avec l'icon : oeil.
+                        </li>
+                        <li>
+                            Modifier un client : Dans la liste de client cliquez sur le bouton avec l'icon : stylo.
+                        </li>
+                        <li>
+                            Supprimer un client : Dans la liste de client cliquez sur le bouton avec l'icon : poubelle.
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div>
+                    <h3>Fonctionnalités lié au Produit</h3>
+                    <ul>
+                        <li>
+                            Consulter un produit : Dans la liste de produits, cliquez sur le bouton avec l'icon : oeil.
+                        </li>
+                    </ul>
+
+                </div>
+                <div>
+                    <h3>Déconnexion</h3>
+                    <p>
+                        Cliquez sur votre nom en haut à gauche de l'écran et cliquez sur "sign out" pour vous déconnecter.
+                    </p>
+                </div>
+        </div>
+
+    </container>
+
+{% endblock %}

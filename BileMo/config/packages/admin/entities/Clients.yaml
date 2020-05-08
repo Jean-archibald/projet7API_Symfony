@@ -30,6 +30,8 @@ easy_admin:
                   - {property: 'postalCode',label: 'Code postal'}
                   - {property: 'birthDate',label: 'Date de naissance'}
                 actions:
+                  - {name: 'search',label: 'Rechercher'}
+                  - {name: 'new',icon: 'plus',label: 'Ajouter un client', css_class: 'btn btn-primary'}
                   - {name: 'show',icon: 'eye', label: false, css_class: 'btn btn-primary'}
                   - {name: 'edit',icon: 'pencil', label: false, css_class: 'btn btn-secondary'}
                   - {name: 'delete',icon: 'trash', label: false, css_class: 'btn btn-danger'}

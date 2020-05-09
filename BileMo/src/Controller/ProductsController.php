@@ -6,6 +6,7 @@ use App\Entity\Products;
 use App\Repository\ProductsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 class ProductsController extends EasyAdminController
@@ -24,6 +25,7 @@ class ProductsController extends EasyAdminController
 
         return new $data();
     }
+
 
     protected function persistEntity($data)
     {

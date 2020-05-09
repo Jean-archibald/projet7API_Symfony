@@ -16,3 +16,11 @@ http://localhost:8000/authentication_token et renseigner en JSON les identifiant
 
 Vous pourrez ensuite a l'aide de ce token JWT vous connecter à l'api sur http://localhost:8000/api
 
+
+Pour se connecter en tant que Admin au backoffice , utiliser les identifiants :
+email : admin@admin.com
+password : undefined
+
+Pour se connecter en tant que Partenaire au backoffice , utiliser les identifiants :
+email : partenaire1@test.fr
+password : test

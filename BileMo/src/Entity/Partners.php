@@ -24,7 +24,7 @@ class Partners implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez renseigner un username")
      * @Assert\Length(min="2", max="255")
      */
     private $username;
@@ -51,7 +51,7 @@ class Partners implements UserInterface
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Clients", mappedBy="partnersId")
+     * @ORM\OneToMany(targetEntity="App\Entity\Clients", mappedBy="partnersId",cascade={"remove"})
      */
     private $clients;
 

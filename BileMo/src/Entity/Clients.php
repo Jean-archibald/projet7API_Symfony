@@ -22,14 +22,14 @@ class Clients
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez renseigner votre nom de famille")
      * @Assert\Length(min="2", max="255")
      */
     private $name;
 
      /**
      * @ORM\Column(type="string", length=255)
-      * @Assert\NotBlank()
+      * @Assert\NotBlank(message="Vous devez renseigner votre prenom")
       * @Assert\Length(min="2", max="255")
      */
     private $firstname;
@@ -47,14 +47,14 @@ class Clients
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez renseigner votre adresse")
      * @Assert\Length(min="5", max="255")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez renseigner un code postal")
      * @Assert\Length(min="0", max="5")
      */
     private $postalCode;

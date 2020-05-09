@@ -21,21 +21,21 @@ class Products
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez renseigner un nom")
      * @Assert\Length(min="2", max="255")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez renseigner une description")
      * @Assert\Length(min="2", max="255")
      */
     private $content;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez renseigner un prix compris entre 1 et 100000")
      * @Assert\Range(min="1", max="100000")
      */
     private $price;

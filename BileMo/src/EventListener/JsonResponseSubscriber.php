@@ -40,7 +40,7 @@ class JsonResponseSubscriber implements EventSubscriberInterface
         $method = $event->getRequest()->getMethod();
         $ressourceSerialize = $this->serializer->serialize($ressource, 'json');
         $data = ['ressource' => $ressourceSerialize];
-        $delete = ['ressource' => 'jo'];
+
 
 
         if (($ressource instanceof Products || $ressource instanceof Partners || $ressource instanceof Clients )

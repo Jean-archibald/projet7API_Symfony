@@ -50,5 +50,6 @@ security:
         - { path: ^/home, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/forgotPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/authentication_token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/documentation, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/front, roles: IS_AUTHENTICATED_FULLY }
-        #- { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
